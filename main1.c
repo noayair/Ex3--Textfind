@@ -10,8 +10,9 @@ int main(){
     }
     insertion_sort(arr,NUM);
     int j = 0;
-    for(j = 0; j < NUM; j++){
+    for(j = 0; j < NUM-1; j++){
         printf("%d,", *(arr+j));
     }
+    printf("%d\n", *(arr+NUM-1));
     return 0;
 }

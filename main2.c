@@ -13,4 +13,5 @@ int main(){
     if(ch == 'b'){
         print_similar_words(s);
     }
+    return 0;
 }
