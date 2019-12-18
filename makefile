@@ -1,38 +1,27 @@
 CC = gcc
 FLAGS = -Wall -g
 
+all: isort txtfind
 
-all:runisort libers runtxtfind liber
+isort: main1.o isort.o
+	$(CC) $(FLAGS) -o isort main1.o isort.o 
 
-libers:libers.a
+main1.o: main1.c isort.h
+	$(CC) $(FLAGS) -c main1.c 
 
-libers.a:isort.o isort.h
-	ar rcs libers.a isort.o isort.h
+isort.o: isort.c isort.h
+	$(CC) $(FLAGS) -c isort.c 
 
-isort.o:isort.c isort.h
-	$(CC) $(FLAGS) -c isort.c
+txtfind: main2.o txtfind.o
+	$(CC) $(FLAGS) -o txtfind main2.o txtfind.o 
 
-main1.o:main1.c isort.h
-	$(CC) $(FLAGS) -c main1.c	
+main2.o: txtfind.c txtfind.h
+	$(CC) $(FLAGS) -c main2.c 
 
-runisort:main1.o libers.a	
-	$(CC) $(FLAGS) -o runisort main1.o libers.a 	
+txtfind.o: txtfind.c txtfind.h
+	$(CC) $(FLAGS) -c txtfind.c 
 
-liber:liber.a
-
-liber.a:txtfind.o txtfind.h
-	ar rcs liber.a txtfind.o txtfind.h
-
-txtfind.o:txtfind.c txtfind.h
-	$(CC) $(FLAGS) -c txtfind.c
-
-main2.o:main2.c txtfind.h
-	$(CC) $(FLAGS) -c main2.c
-
-runtxtfind:main2.o liber.a
-	$(CC) $(FLAGS) -o run main2.o liber.a 
-
-.PHONY:clean all
+.PHONY: clean all
 
 clean:
-	rm -f *.o *.a *.so runtxtfind runisort
+	rm -f *.o isort txtfind
