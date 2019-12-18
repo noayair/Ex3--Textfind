@@ -1,6 +1,7 @@
 #include "isort.h"
 #include <stdio.h>
 
+//insertion sort
 int main(){
     int arr[NUM] = {0};
     int i = 0;
